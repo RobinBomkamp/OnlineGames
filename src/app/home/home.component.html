@@ -1,1 +1,10 @@
-<p>home works!</p>
+<mdc-card class="container">
+    <form [formGroup]="homeForm" (ngSubmit)="submit()" class="form-container">
+        <mdc-form-field fluid class="text-field">
+            <mdc-text-field formControlName="name" label="Name" outlined></mdc-text-field>
+        </mdc-form-field>
+        <div class="button-container">
+            <button mdc-button raised type=submit>Example</button>
+        </div>
+    </form>
+</mdc-card>
