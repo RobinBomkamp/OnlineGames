@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "onlinegames-op": {
+      "hosting": {
+        "OnlineGames": [
+          "onlinegames-op"
+        ]
+      }
+    }
+  }
+}
