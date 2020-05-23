@@ -4,8 +4,9 @@
 @use '@material/theme' with (
   $primary: #BB86FC,
   $secondary: #03DAC5,
+  $background: #1f1b24,
   $surface: #121212,
-  $background: #1F1B24,
+  $error: #CF6679,
 );
 
 // MDC Typography

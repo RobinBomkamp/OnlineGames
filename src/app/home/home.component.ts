@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit {
     let room = this.homeForm.get("room").value as RoomModel;
     room.users = [ user ];
     this.roomService.add(room);
-    
   }
 
 }
