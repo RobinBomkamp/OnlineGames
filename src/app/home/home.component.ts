@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { UserModel } from '../model/user.model';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +15,10 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.homeForm = this.fb.group(new UserModel());
+    this.homeForm = this.fb.group({
+      roomName: null,
+      userName: null
+    });
   }
 
   submit(): void {

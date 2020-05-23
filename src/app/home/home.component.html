@@ -1,7 +1,10 @@
 <mdc-card class="container">
     <form [formGroup]="homeForm" (ngSubmit)="submit()" class="form-container">
         <mdc-form-field fluid class="text-field">
-            <mdc-text-field formControlName="name" label="Name" outlined></mdc-text-field>
+            <mdc-text-field formControlName="roomName" label="Roomname" outlined></mdc-text-field>
+        </mdc-form-field>
+        <mdc-form-field fluid class="text-field">
+            <mdc-text-field formControlName="userName" label="Username" outlined></mdc-text-field>
         </mdc-form-field>
         <div class="button-container">
             <button mdc-button raised type=submit>Create room</button>
