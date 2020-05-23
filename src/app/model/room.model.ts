@@ -1,7 +1,9 @@
 import { UserModel } from './user.model';
 
 export class RoomModel {
-    name: string = "" 
+    id: string = null;
+    name: string = "" ;
+    password: string = "";
 
-    users: UserModel[];    
+    users: UserModel[] = [];    
 }
