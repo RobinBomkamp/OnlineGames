@@ -1,0 +1,20 @@
+<mdc-card class="container">
+    <form [formGroup]="homeForm" (ngSubmit)="submit()" class="form-container">
+        <ng-container formGroupName="room">
+            <mdc-form-field fluid class="text-field">
+                <mdc-text-field formControlName="name" label="Roomname" outlined></mdc-text-field>
+            </mdc-form-field>
+            <mdc-form-field fluid class="text-field">
+                <mdc-text-field formControlName="password" label="Password" outlined></mdc-text-field>
+            </mdc-form-field>
+        </ng-container>
+        <ng-container formGroupName="user">
+            <mdc-form-field fluid class="text-field">
+                <mdc-text-field formControlName="name" label="Username" outlined></mdc-text-field>
+            </mdc-form-field>
+        </ng-container>
+        <div class="button-container">
+            <button mdc-button raised type=submit>Create room</button>
+        </div>
+    </form>
+</mdc-card>
