@@ -1,2 +1,20 @@
-<p>room works!</p>
-<span>{{id}}</span>
+<ng-container *ngIf="room$ | async as room">
+    <mdc-top-app-bar fixed [scrollTarget]="fixedContent" [fixedAdjustElement]="fixedContent" dense>
+        <mdc-top-app-bar-row>
+            <mdc-top-app-bar-section align="start" title="{{room.name}}">
+                <button mdcTopAppBarNavIcon>
+                    <mdc-icon>menu</mdc-icon>
+                </button>
+            </mdc-top-app-bar-section>
+            <mdc-top-app-bar-section align="end">
+                <mdc-icon mdcTopAppBarActionItem>file_download</mdc-icon>
+                <mdc-icon mdcTopAppBarActionItem>print</mdc-icon>
+                <mdc-icon mdcTopAppBarActionItem>bookmark</mdc-icon>
+            </mdc-top-app-bar-section>
+        </mdc-top-app-bar-row>
+    </mdc-top-app-bar>
+    <div #fixedContent>
+        <span>{{room | json}}</span>
+    </div>
+</ng-container>
+

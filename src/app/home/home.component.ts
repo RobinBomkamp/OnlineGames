@@ -4,7 +4,6 @@ import { RoomModel } from '../model/room.model';
 import { UserModel } from '../model/user.model';
 import { UserService } from '../services/user.service';
 import { RoomService } from '../services/room.service';
-import { Router } from '@angular/router';
 import { NavigationService } from '../services/navigation.service';
 
 @Component({

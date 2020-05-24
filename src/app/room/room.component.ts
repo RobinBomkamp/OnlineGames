@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { RoomModel } from '../model/room.model';
+import { RoomService } from '../services/room.service';
+import { tap } from "rxjs/operators";
 
 @Component({
   selector: 'app-room',
@@ -8,14 +12,19 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RoomComponent implements OnInit {
 
-  id: string; 
+  id: string;
+  room$: Observable<RoomModel>;
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private roomService: RoomService
   ) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get("id");
+    this.room$ = this.roomService.get(this.id).pipe(
+      tap(console.log)
+    );
   }
 
 }
