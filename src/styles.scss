@@ -11,6 +11,7 @@
 
 // MDC Typography
 @use '@material/typography/mdc-typography';
+@use '@material/typography/_index';
 
 // MDC Button
 @use './styles/body';
@@ -20,6 +21,7 @@
 @use './styles/top-app-bar';
 @use './styles/list';
 @use './styles/drawer';
+@use './styles/snackbar';
 
 // Angular MDC
 @use '@angular-mdc/theme/material';

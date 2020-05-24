@@ -1,0 +1,25 @@
+:host {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    height: 100%;
+}
+
+.container {
+    width: 30%;
+    margin-top: auto;
+    margin-bottom: auto;    
+}
+
+.form-container {
+    margin: 16px;
+}
+
+.text-field {
+    margin-bottom: 8px;
+}
+
+.button-container {
+    float: right;
+}

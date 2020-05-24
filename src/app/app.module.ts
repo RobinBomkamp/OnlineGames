@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { MdcFormFieldModule, MdcTextFieldModule, MdcButtonModule, MdcCardModule, MdcIconModule, MdcTopAppBarModule, MdcDrawerModule, MdcListModule } from "@angular-mdc/web";
+import { MdcFormFieldModule, MdcTextFieldModule, MdcButtonModule, MdcCardModule, MdcIconModule, MdcTopAppBarModule, MdcDrawerModule, MdcListModule, MdcTypographyModule, MdcSnackbarModule } from "@angular-mdc/web";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,12 +12,14 @@ import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { RoomComponent } from './room/room.component';
+import { JoinComponent } from './join/join.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    RoomComponent
+    RoomComponent,
+    JoinComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,9 @@ import { RoomComponent } from './room/room.component';
     MdcIconModule,
     MdcTopAppBarModule,
     MdcDrawerModule,
-    MdcListModule
+    MdcListModule,
+    MdcTypographyModule,
+    MdcSnackbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
