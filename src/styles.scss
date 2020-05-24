@@ -17,6 +17,9 @@
 @use './styles/button';
 @use './styles/text-field';
 @use './styles/card';
+@use './styles/top-app-bar';
+@use './styles/list';
+@use './styles/drawer';
 
 // Angular MDC
 @use '@angular-mdc/theme/material';

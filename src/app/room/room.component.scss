@@ -1,0 +1,24 @@
+:host {
+    display: flex;
+    height: 100%;
+}
+
+.content {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.drawer {
+    flex: 0 0 auto;
+    height: 100%;
+
+    & mdc-list-item {
+        user-select: none;
+        pointer-events: none;
+    }
+}
+
+.drawer-content {
+    flex: 1 1 auto
+}
