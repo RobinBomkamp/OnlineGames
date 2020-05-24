@@ -1,13 +1,13 @@
-<ng-container *ngIf="room$ | async as room">
+<ng-container *ngIf="data$ | async as data">
     <mdc-top-app-bar fixed [scrollTarget]="realContent" [fixedAdjustElement]="fixedContent" dense>
         <mdc-top-app-bar-row>
-            <mdc-top-app-bar-section align="start" title="{{room.name}}">
+            <mdc-top-app-bar-section align="start" title="{{data.room.name}}">
             </mdc-top-app-bar-section>
         </mdc-top-app-bar-row>
     </mdc-top-app-bar>
     <div #fixedContent class="content">
         <div mdcDrawerAppContent class="drawer-content" #realContent>
-            <span>{{room | json}}</span>
+            <span>{{data | json}}</span>
         </div>
         <mdc-drawer class="drawer" dir="rtl">
             <mdc-drawer-header>
@@ -16,7 +16,7 @@
             </mdc-drawer-header>
             <mdc-drawer-content dir="rtl">
                 <mdc-list>
-                    <mdc-list-item *ngFor="let user of room.users">
+                    <mdc-list-item *ngFor="let user of data.users" [activated]="user.name === data.room.host">
                         <mdc-icon mdcListItemGraphic>person</mdc-icon>{{user.name}}
                     </mdc-list-item>
                 </mdc-list>

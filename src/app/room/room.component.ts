@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { RoomModel } from '../model/room.model';
 import { RoomService } from '../services/room.service';
-import { tap } from "rxjs/operators";
+import { tap, switchMap, map, combineAll } from "rxjs/operators";
+import { UserModel } from '../model/user.model';
+
+class ObservedData {
+  room: RoomModel;
+  users: UserModel[];
+}
 
 @Component({
   selector: 'app-room',
@@ -21,6 +27,8 @@ export class RoomComponent implements OnInit {
 
   id: string;
   room$: Observable<RoomModel>;
+  users$: Observable<UserModel[]>;
+  data$: Observable<ObservedData>;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,9 +37,21 @@ export class RoomComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get("id");
-    this.room$ = this.roomService.get(this.id).pipe(
-      tap(console.log)
+    this.room$ = this.roomService.get(this.id);
+    this.users$ = this.room$.pipe(
+      switchMap(room => {
+        return this.roomService.getUsersFromRoom(room);
+      })
     );
+
+    this.data$ = combineLatest(this.room$, this.users$).pipe(
+      map(([room, users]) => {
+        return {
+          room: room,
+          users: users
+        } as ObservedData
+      })
+    )
   }
 
 }

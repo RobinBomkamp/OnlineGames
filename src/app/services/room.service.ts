@@ -14,18 +14,12 @@ export class RoomService {
   private roomSelector: string = "rooms";
   private usersSelector: string = "users";
   private roomsCollection: AngularFirestoreCollection<RoomModel>;
-  rooms$: Observable<RoomModel[]>;
 
   constructor(
     private firestore: AngularFirestore,
     private snackbar: MdcSnackbar
   ) { 
     this.roomsCollection = this.firestore.collection<RoomModel>(this.roomSelector);
-    this.rooms$ = this.roomsCollection.valueChanges();
-  }
-
-  getAll(): Observable<RoomModel[]> {
-    return this.firestore.collection<RoomModel>(this.roomSelector).valueChanges();
   }
 
   get(id: string): Observable<RoomModel> {
@@ -65,6 +59,6 @@ export class RoomService {
   }
 
   getUsersFromRoom(room: RoomModel): Observable<UserModel[]> {
-    return this.roomsCollection.doc(room.id).collection<UserModel>(this.usersSelector).valueChanges();
+    return this.roomsCollection.doc<RoomModel>(room.id).collection<UserModel>(this.usersSelector).valueChanges();
   }
 }
