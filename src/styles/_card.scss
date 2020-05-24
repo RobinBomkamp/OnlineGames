@@ -1,2 +1,8 @@
 @use '@material/card/mdc-card';
 @use '@material/card';
+@use '@material/theme';
+
+.card-title {
+    @include theme.prop(color, theme.$primary);
+    margin-bottom: 16px;
+}
