@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { MdcFormFieldModule, MdcTextFieldModule, MdcButtonModule, MdcCardModule, MdcIconModule, MdcTopAppBarModule } from "@angular-mdc/web";
+import { MdcFormFieldModule, MdcTextFieldModule, MdcButtonModule, MdcCardModule, MdcIconModule, MdcTopAppBarModule, MdcDrawerModule, MdcListModule } from "@angular-mdc/web";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,7 +33,9 @@ import { RoomComponent } from './room/room.component';
     MdcButtonModule,
     MdcCardModule,
     MdcIconModule,
-    MdcTopAppBarModule
+    MdcTopAppBarModule,
+    MdcDrawerModule,
+    MdcListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

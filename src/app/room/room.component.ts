@@ -12,6 +12,13 @@ import { tap } from "rxjs/operators";
 })
 export class RoomComponent implements OnInit {
 
+  destinations = [
+    { label: 'Inbox', icon: 'inbox', activated: true },
+    { label: 'Star', icon: 'star', activated: false },
+    { label: 'Sent Mail', icon: 'send', activated: false },
+    { label: 'Drafts', icon: 'drafts', activated: false }
+  ];
+
   id: string;
   room$: Observable<RoomModel>;
 
