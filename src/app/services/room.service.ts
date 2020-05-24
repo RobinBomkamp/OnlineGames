@@ -1,27 +1,35 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { RoomModel } from '../model/room.model';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoomService {
   private roomSelector: string = "rooms";
-  private roomRef: AngularFireList<RoomModel>;
+  private roomsCollection: AngularFirestoreCollection<RoomModel>;
+  rooms$: Observable<RoomModel[]>;
 
   constructor(
-    private db: AngularFireDatabase
+    private firestore: AngularFirestore
   ) { 
-    this.roomRef = this.db.list(this.roomSelector);
+    this.roomsCollection = this.firestore.collection<RoomModel>(this.roomSelector);
+    this.rooms$ = this.roomsCollection.valueChanges();
   }
 
-  get(): Observable<RoomModel[]> {    
-    return this.db.list(this.roomSelector).valueChanges() as Observable<RoomModel[]>;
+  getAll(): Observable<RoomModel[]> {
+    return this.firestore.collection<RoomModel>(this.roomSelector).valueChanges();
   }
 
-  add(room: RoomModel) {
-    this.roomRef.push(room);
-    this.roomRef.snapshotChanges().subscribe(console.log);
+  get(id: string): Observable<RoomModel> {
+    return this.roomsCollection.doc<RoomModel>(id).valueChanges();  
+  }
+
+  add(room: RoomModel): string {
+    const id = this.firestore.createId();
+    room.id = id;
+    this.roomsCollection.doc(id).set(room);
+    return id;
   }
 }

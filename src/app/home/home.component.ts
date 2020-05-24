@@ -4,6 +4,8 @@ import { RoomModel } from '../model/room.model';
 import { UserModel } from '../model/user.model';
 import { UserService } from '../services/user.service';
 import { RoomService } from '../services/room.service';
+import { Router } from '@angular/router';
+import { NavigationService } from '../services/navigation.service';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +19,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private roomService: RoomService
+    private roomService: RoomService,
+    private navigation: NavigationService
   ) { }
 
   ngOnInit(): void {
@@ -31,7 +34,8 @@ export class HomeComponent implements OnInit {
     let user = this.userService.create(this.homeForm.get("user").value as UserModel)
     let room = this.homeForm.get("room").value as RoomModel;
     room.users = [ user ];
-    this.roomService.add(room);
-  }
+    let id = this.roomService.add(room);
 
+    this.navigation.toRoom(id);
+  }
 }
