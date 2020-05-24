@@ -2,14 +2,6 @@
     <mdc-top-app-bar fixed [scrollTarget]="realContent" [fixedAdjustElement]="fixedContent" dense>
         <mdc-top-app-bar-row>
             <mdc-top-app-bar-section align="start" title="{{room.name}}">
-                <button mdcTopAppBarNavIcon>
-                    <mdc-icon>menu</mdc-icon>
-                </button>
-            </mdc-top-app-bar-section>
-            <mdc-top-app-bar-section align="end">
-                <mdc-icon mdcTopAppBarActionItem>file_download</mdc-icon>
-                <mdc-icon mdcTopAppBarActionItem>print</mdc-icon>
-                <mdc-icon mdcTopAppBarActionItem>bookmark</mdc-icon>
             </mdc-top-app-bar-section>
         </mdc-top-app-bar-row>
     </mdc-top-app-bar>
@@ -26,9 +18,6 @@
                 <mdc-list>
                     <mdc-list-item *ngFor="let user of room.users">
                         <mdc-icon mdcListItemGraphic>person</mdc-icon>{{user.name}}
-                    </mdc-list-item>
-                    <mdc-list-item *ngFor="let item of destinations" [activated]="item.activated">
-                        <mdc-icon mdcListItemGraphic *ngIf="item.icon">{{item.icon}}</mdc-icon>{{item.label}}
                     </mdc-list-item>
                 </mdc-list>
             </mdc-drawer-content>
