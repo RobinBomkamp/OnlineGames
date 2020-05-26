@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
-import { UserModel } from '../model/user.model';
-import { UUID } from 'angular2-uuid';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
+  private currentUserSelector: string = "online-games-current-user";
+
   constructor() { }
 
-  create(user: UserModel): UserModel {
-    if (!user.id) {
-      user.id = UUID.UUID();
-    }
-    return user;
+  saveUser(userName: string) {
+    localStorage.setItem(this.currentUserSelector, userName);
+  }
+
+  getUser(): string {
+    let result = localStorage.getItem(this.currentUserSelector);
+    return result !== null && result !== undefined && result !== "" ? result : "";
   }
 }

@@ -5,6 +5,7 @@ import { RoomModel } from '../model/room.model';
 import { RoomService } from '../services/room.service';
 import { tap, switchMap, map, combineAll } from "rxjs/operators";
 import { UserModel } from '../model/user.model';
+import { UserService } from '../services/user.service';
 
 class ObservedData {
   room: RoomModel;
@@ -32,7 +33,8 @@ export class RoomComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private roomService: RoomService
+    private roomService: RoomService,
+    public userService: UserService
   ) { }
 
   ngOnInit(): void {
