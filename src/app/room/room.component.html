@@ -1,7 +1,7 @@
 <ng-container *ngIf="data$ | async as data">
     <mdc-top-app-bar fixed [scrollTarget]="realContent" [fixedAdjustElement]="fixedContent" dense>
         <mdc-top-app-bar-row>
-            <mdc-top-app-bar-section align="start" title="{{data.room.name}}">
+            <mdc-top-app-bar-section align="start" title="{{data.room.name}} - {{userService.getUser()}}">
             </mdc-top-app-bar-section>
         </mdc-top-app-bar-row>
     </mdc-top-app-bar>

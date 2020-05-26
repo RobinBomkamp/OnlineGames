@@ -40,7 +40,10 @@ export class JoinComponent implements OnInit {
 
   submit(room: RoomModel): void {
     let formRoom = this.homeForm.get("room").value as RoomModel;
-    this.roomService.addUser(room, this.homeForm.get("user").value as UserModel, formRoom.password).subscribe(() => {
+
+    let user = this.homeForm.get("user").value as UserModel;
+    this.userService.saveUser(user.name);
+    this.roomService.addUser(room, user, formRoom.password).subscribe(() => {
       this.navigation.toRoom(room.id);
     });
   }

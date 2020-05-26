@@ -18,7 +18,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private roomService: RoomService,
-    private navigation: NavigationService
+    private navigation: NavigationService,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -27,6 +28,7 @@ export class HomeComponent implements OnInit {
 
   submit(): void {
     let room = this.homeForm.value as RoomModel;
+    this.userService.saveUser(room.host);
     let id = this.roomService.create(room);
     this.navigation.toRoom(id);
   }
