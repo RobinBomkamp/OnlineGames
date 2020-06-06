@@ -3,9 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, combineLatest } from 'rxjs';
 import { RoomModel } from '../model/room.model';
 import { RoomService } from '../services/room.service';
-import { tap, switchMap, map, combineAll } from "rxjs/operators";
+import { switchMap, map } from "rxjs/operators";
 import { UserModel } from '../model/user.model';
 import { UserService } from '../services/user.service';
+import { Clipboard } from "@angular/cdk/clipboard";
 
 class ObservedData {
   room: RoomModel;
@@ -34,7 +35,8 @@ export class RoomComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private roomService: RoomService,
-    public userService: UserService
+    public userService: UserService,
+    private clipboard: Clipboard
   ) { }
 
   ngOnInit(): void {
@@ -56,4 +58,12 @@ export class RoomComponent implements OnInit {
     )
   }
 
+  copyInvitationLink(): void {    
+    let url = window.location.href;
+    if (!url.endsWith("/")) {
+      url += "/";
+    }
+    url += "join";
+    this.clipboard.copy(url);
+  }
 }

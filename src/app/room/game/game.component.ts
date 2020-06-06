@@ -32,4 +32,8 @@ export class GameComponent implements OnInit {
 
     await this.roomService.setGame(this.room, agentName, activePlace);
   }
+
+  isAgent(): boolean {
+    return this.userService.getUser() === this.room.agentName
+  }
 }

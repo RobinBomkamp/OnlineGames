@@ -4,8 +4,8 @@
             <mdc-top-app-bar-section align="start" title="{{data.room.name}} - {{userService.getUser()}}">
             </mdc-top-app-bar-section>
             <mdc-top-app-bar-section align="end">
-                <button mdc-button raised class="top-app-bar-button" (click)="game.startGame()">Neue Runde starten</button>
-                <button mdc-button raised class="top-app-bar-button">Einladungslink kopieren</button>
+                <button mdc-button raised class="top-app-bar-button" (click)="game.startGame()" *ngIf="userService.getUser() === data.room.host">Neue Runde starten</button>
+                <button mdc-button raised class="top-app-bar-button" (click)="copyInvitationLink()">Einladungslink kopieren</button>
             </mdc-top-app-bar-section>
         </mdc-top-app-bar-row>
     </mdc-top-app-bar>

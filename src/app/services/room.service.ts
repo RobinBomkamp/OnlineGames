@@ -18,19 +18,19 @@ export class RoomService {
   constructor(
     private firestore: AngularFirestore,
     private snackbar: MdcSnackbar
-  ) { 
+  ) {
     this.roomsCollection = this.firestore.collection<RoomModel>(this.roomSelector);
   }
 
   get(id: string): Observable<RoomModel> {
-    return this.roomsCollection.doc<RoomModel>(id).valueChanges();  
+    return this.roomsCollection.doc<RoomModel>(id).valueChanges();
   }
 
   create(room: RoomModel): string {
     const id = this.firestore.createId();
     room.id = id;
     this.roomsCollection.doc(id).set(room);
-    this.addUserInternal(id, {name: room.host} as UserModel);
+    this.addUserInternal(id, { name: room.host } as UserModel);
     return id;
   }
 
@@ -46,7 +46,7 @@ export class RoomService {
         if (users.some(x => x.name === user.name)) {
           this.snackbar.open("Username already assigned to other user.")
           return;
-        }  
+        }
         return this.addUserInternal(room.id, user);
       })
     );
