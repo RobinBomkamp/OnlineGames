@@ -12,4 +12,5 @@
 
 .top-app-bar-button {
   @include button.filled-accessible(theme.$surface);
+  margin-left: 8px;
 }

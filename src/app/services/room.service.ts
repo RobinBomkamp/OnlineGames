@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RoomModel } from '../model/room.model';
+import { RoomModel, JobsToUserModel } from '../model/room.model';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { UserModel } from '../model/user.model';
@@ -63,9 +63,10 @@ export class RoomService {
     return this.roomsCollection.doc<RoomModel>(room.id).collection<UserModel>(this.usersSelector).valueChanges();
   }
 
-  setGame(room: RoomModel, agentName: string, activePlace: number): Promise<any> {
+  setGame(room: RoomModel, agentName: string, activePlace: number, jobsToUsers: JobsToUserModel[]): Promise<any> {
     room.agentName = agentName;
     room.activePlace = activePlace;
+    room.jobs = jobsToUsers;
     return this.roomsCollection.doc(room.id).set(room);
   }
 

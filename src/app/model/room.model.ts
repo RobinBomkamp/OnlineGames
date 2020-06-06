@@ -1,3 +1,8 @@
+export class JobsToUserModel {
+    job: string;
+    user: string;
+}
+
 export class RoomModel {
     id: string = null;
     name: string = "" ;
@@ -7,4 +12,6 @@ export class RoomModel {
 
     agentName: string = "";
     activePlace: number = -1;
+
+    jobs: JobsToUserModel[] = [];
 }

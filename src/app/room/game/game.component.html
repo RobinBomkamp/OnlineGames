@@ -3,7 +3,10 @@
         <mdc-image-list-item class="list-item" *ngFor="let place of places; let i = index">
             <mdc-card [class.card--active]="i === room.activePlace && !isAgent()">
                 <div>
-                    <div mdcHeadline4 class="card-title">{{place}}</div>
+                    <div mdcHeadline4 class="card-title">{{place.name}}</div>
+                </div>
+                <div class="job-container">
+                    {{getJob()}}
                 </div>
             </mdc-card>
         </mdc-image-list-item>
