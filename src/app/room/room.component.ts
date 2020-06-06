@@ -7,6 +7,7 @@ import { switchMap, map } from "rxjs/operators";
 import { UserModel } from '../model/user.model';
 import { UserService } from '../services/user.service';
 import { Clipboard } from "@angular/cdk/clipboard";
+import { NavigationService } from '../services/navigation.service';
 
 class ObservedData {
   room: RoomModel;
@@ -36,7 +37,8 @@ export class RoomComponent implements OnInit {
     private route: ActivatedRoute,
     private roomService: RoomService,
     public userService: UserService,
-    private clipboard: Clipboard
+    private clipboard: Clipboard,
+    private navigation: NavigationService
   ) { }
 
   ngOnInit(): void {
@@ -50,12 +52,13 @@ export class RoomComponent implements OnInit {
 
     this.data$ = combineLatest(this.room$, this.users$).pipe(
       map(([room, users]) => {
+        this.roomService.saveRoom(room.id);
         return {
           room: room,
           users: users
         } as ObservedData
       })
-    )
+    );
   }
 
   copyInvitationLink(): void {    
@@ -65,5 +68,10 @@ export class RoomComponent implements OnInit {
     }
     url += "join";
     this.clipboard.copy(url);
+  }
+
+  leaveRoom(): void {
+    this.roomService.deleteRoom();
+    this.navigation.toHome();
   }
 }

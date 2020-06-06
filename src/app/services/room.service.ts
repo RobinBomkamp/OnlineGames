@@ -14,6 +14,7 @@ export class RoomService {
   private roomSelector: string = "rooms";
   private usersSelector: string = "users";
   private roomsCollection: AngularFirestoreCollection<RoomModel>;
+  private currentRoomSelector: string = "online-games-current-room";
 
   constructor(
     private firestore: AngularFirestore,
@@ -66,5 +67,18 @@ export class RoomService {
     room.agentName = agentName;
     room.activePlace = activePlace;
     return this.roomsCollection.doc(room.id).set(room);
+  }
+
+  saveRoom(roomId: string) {
+    localStorage.setItem(this.currentRoomSelector, roomId);
+  }
+
+  getRoom(): string {
+    let result = localStorage.getItem(this.currentRoomSelector);
+    return result !== null && result !== undefined && result !== "" ? result : "";
+  }
+
+  deleteRoom(): void {
+    localStorage.removeItem(this.currentRoomSelector);
   }
 }
