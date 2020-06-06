@@ -1,3 +1,11 @@
 @use '@material/top-app-bar/mdc-top-app-bar';
 @use '@material/top-app-bar/_index';
 @use '@material/icon-button/mdc-icon-button';
+
+.bottom-app-bar {
+    top: unset !important;
+    bottom: 0;
+
+    position: relative;
+    flex: 0 0 auto;
+}

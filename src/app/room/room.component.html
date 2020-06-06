@@ -3,16 +3,20 @@
         <mdc-top-app-bar-row>
             <mdc-top-app-bar-section align="start" title="{{data.room.name}} - {{userService.getUser()}}">
             </mdc-top-app-bar-section>
+            <mdc-top-app-bar-section align="end">
+                <button mdc-button raised class="top-app-bar-button" (click)="game.startGame()">Neue Runde starten</button>
+                <button mdc-button raised class="top-app-bar-button">Einladungslink kopieren</button>
+            </mdc-top-app-bar-section>
         </mdc-top-app-bar-row>
     </mdc-top-app-bar>
     <div #fixedContent class="content">
         <div mdcDrawerAppContent class="drawer-content" #realContent>
-            <span>{{data | json}}</span>
+            <app-game [users]="data.users" [room]="data.room" #game></app-game>
         </div>
         <mdc-drawer class="drawer" dir="rtl">
             <mdc-drawer-header>
-                <h3 mdcDrawerTitle>Room info</h3>
-                <h6 mdcDrawerSubtitle>Users</h6>
+                <h3 mdcDrawerTitle>Raum</h3>
+                <h6 mdcDrawerSubtitle>Nutzer</h6>
             </mdc-drawer-header>
             <mdc-drawer-content dir="rtl">
                 <mdc-list>

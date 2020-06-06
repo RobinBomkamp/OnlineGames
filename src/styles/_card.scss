@@ -6,3 +6,11 @@
     @include theme.prop(color, theme.$primary);
     margin-bottom: 16px;
 }
+
+.card--active {
+    @include card.fill-color(theme.$primary);
+
+    & .card-title {
+        @include theme.prop(color, theme.$on-primary);
+    }
+}

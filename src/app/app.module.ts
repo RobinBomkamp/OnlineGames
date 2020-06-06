@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { MdcFormFieldModule, MdcTextFieldModule, MdcButtonModule, MdcCardModule, MdcIconModule, MdcTopAppBarModule, MdcDrawerModule, MdcListModule, MdcTypographyModule, MdcSnackbarModule } from "@angular-mdc/web";
+import { MdcFormFieldModule, MdcTextFieldModule, MdcButtonModule, MdcCardModule, MdcIconModule, MdcTopAppBarModule, MdcDrawerModule, MdcListModule, MdcTypographyModule, MdcSnackbarModule, MdcImageListModule } from "@angular-mdc/web";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,13 +13,15 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { RoomComponent } from './room/room.component';
 import { JoinComponent } from './join/join.component';
+import { GameComponent } from './room/game/game.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     RoomComponent,
-    JoinComponent
+    JoinComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { JoinComponent } from './join/join.component';
     MdcDrawerModule,
     MdcListModule,
     MdcTypographyModule,
-    MdcSnackbarModule
+    MdcSnackbarModule,
+    MdcImageListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

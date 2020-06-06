@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-
 @use '@material/theme' with (
   $primary: #BB86FC,
   $secondary: #03DAC5,
@@ -22,6 +21,7 @@
 @use './styles/list';
 @use './styles/drawer';
 @use './styles/snackbar';
+@use './styles/image-list';
 
 // Angular MDC
 @use '@angular-mdc/theme/material';

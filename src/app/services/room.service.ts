@@ -61,4 +61,10 @@ export class RoomService {
   getUsersFromRoom(room: RoomModel): Observable<UserModel[]> {
     return this.roomsCollection.doc<RoomModel>(room.id).collection<UserModel>(this.usersSelector).valueChanges();
   }
+
+  setGame(room: RoomModel, agentName: string, activePlace: number): Promise<any> {
+    room.agentName = agentName;
+    room.activePlace = activePlace;
+    return this.roomsCollection.doc(room.id).set(room);
+  }
 }

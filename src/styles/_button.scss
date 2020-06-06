@@ -9,3 +9,7 @@
 .button-secondary {
   @include button.filled-accessible(theme.$secondary);
 }
+
+.top-app-bar-button {
+  @include button.filled-accessible(theme.$surface);
+}
