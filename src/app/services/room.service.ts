@@ -32,6 +32,7 @@ export class RoomService {
     room.id = id;
     this.roomsCollection.doc(id).set(room);
     this.addUserInternal(id, { name: room.host } as UserModel);
+    let jobs = this.roomsCollection.doc(id).collection<JobsToUserModel>("jobs");
     return id;
   }
 
@@ -62,12 +63,21 @@ export class RoomService {
   getUsersFromRoom(room: RoomModel): Observable<UserModel[]> {
     return this.roomsCollection.doc<RoomModel>(room.id).collection<UserModel>(this.usersSelector).valueChanges();
   }
+  
+  getJobsToUsersFromRoom(room: RoomModel): Observable<JobsToUserModel[]> {
+    return this.roomsCollection.doc<RoomModel>(room.id).collection<JobsToUserModel>("jobs").valueChanges();
+  }
 
-  setGame(room: RoomModel, agentName: string, activePlace: number, jobsToUsers: JobsToUserModel[]): Promise<any> {
+ setGame(room: RoomModel, agentName: string, activePlace: number, jobsToUsers: JobsToUserModel[]): Promise<any> {
     room.agentName = agentName;
     room.activePlace = activePlace;
-    room.jobs = jobsToUsers;
-    return this.roomsCollection.doc(room.id).set(room);
+    return this.roomsCollection.doc(room.id).set(room).then(() => {
+      let jobs = this.roomsCollection.doc(room.id).collection<JobsToUserModel>("jobs");
+      
+      for (const jobsToUser of jobsToUsers) {
+        jobs.doc(this.firestore.createId()).set(jobsToUser);
+      }
+    });
   }
 
   saveRoom(roomId: string) {

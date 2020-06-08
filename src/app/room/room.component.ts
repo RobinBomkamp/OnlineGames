@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, combineLatest } from 'rxjs';
-import { RoomModel } from '../model/room.model';
+import { RoomModel, JobsToUserModel } from '../model/room.model';
 import { RoomService } from '../services/room.service';
 import { switchMap, map } from "rxjs/operators";
 import { UserModel } from '../model/user.model';
@@ -12,6 +12,7 @@ import { NavigationService } from '../services/navigation.service';
 class ObservedData {
   room: RoomModel;
   users: UserModel[];
+  jobs: JobsToUserModel[];
 }
 
 @Component({
@@ -49,13 +50,19 @@ export class RoomComponent implements OnInit {
         return this.roomService.getUsersFromRoom(room);
       })
     );
+    let jobs$ = this.room$.pipe(
+      switchMap(room => {
+        return this.roomService.getJobsToUsersFromRoom(room);
+      })
+    )
 
-    this.data$ = combineLatest(this.room$, this.users$).pipe(
-      map(([room, users]) => {
+    this.data$ = combineLatest(this.room$, this.users$, jobs$).pipe(
+      map(([room, users, jobs]) => {
         this.roomService.saveRoom(room.id);
         return {
           room: room,
-          users: users
+          users: users,
+          jobs: jobs
         } as ObservedData
       })
     );

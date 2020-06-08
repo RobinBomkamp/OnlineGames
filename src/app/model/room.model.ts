@@ -13,5 +13,5 @@ export class RoomModel {
     agentName: string = "";
     activePlace: number = -1;
 
-    jobs: JobsToUserModel[] = [];
+    // jobs: JobsToUserModel[] = [];
 }

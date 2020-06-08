@@ -11,7 +11,7 @@
     </mdc-top-app-bar>
     <div #fixedContent class="content">
         <div mdcDrawerAppContent class="drawer-content" #realContent>
-            <app-game [users]="data.users" [room]="data.room" #game></app-game>
+            <app-game [users]="data.users" [room]="data.room" [jobs]="data.jobs" #game></app-game>
         </div>
         <mdc-drawer class="drawer" dir="rtl">
             <mdc-drawer-header>

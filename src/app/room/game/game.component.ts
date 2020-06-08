@@ -13,6 +13,7 @@ export class GameComponent implements OnInit {
 
   @Input() users: UserModel[];
   @Input() room: RoomModel;
+  @Input() jobs: JobsToUserModel[] = [];
 
   places = [
     { name: "Bank", jobs: ["Kassier", "Fililialleiter", "Analageberater", "Wachmann", "Räuber", "Kunde", "Versicherungsberater"] },
@@ -79,10 +80,14 @@ export class GameComponent implements OnInit {
   }
 
   getJob(): string {
-    if (!this.room.jobs) {
+    if (!this.jobs) {
       return ""; 
     }
-    let job = this.room.jobs.find(x => x.user === this.userService.getUser()).job
+    let element = this.jobs.find(x => x.user === this.userService.getUser());
+    if (!element) {
+      return "";
+    }
+    let job = element.job
     return job !== undefined && job !== null ? job : "";
   }
 }
