@@ -5,10 +5,16 @@ export class JobsToUserModel {
     user: string;
 }
 
+export class AnswerModel {
+    value: number;
+}
+
 export class TeamModel {
     id: string = null;
     name: string = "";
     members: UserModel[] = [];
+    points: number = 0;
+    knowledge: boolean = false;
 }
 
 export class RoomModel {

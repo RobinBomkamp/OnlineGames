@@ -10,6 +10,7 @@ export class TeamComponent implements OnInit {
   @Input() active: boolean;
   @Input() members: string[];
   @Input() showResults: boolean;
+  @Input() points: number;
 
   constructor() { }
 

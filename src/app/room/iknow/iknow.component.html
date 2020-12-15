@@ -11,24 +11,30 @@
         </mdc-card>
     
         <div class="container__question_container">
-            <mdc-radio-group>
-                <mdc-card class="card--active" [class.correct]="showCorrectResult && activeQuestion().correct === 1">
-                    <mdc-radio [style.display]="answeringQuestions ? '' : 'none'" #radio1></mdc-radio>
-                    <div mdcHeadline4 class="card-title" mdcHeadline5>{{activeQuestion().answer1}}</div>
-                </mdc-card>
-                <mdc-card class="card--active" [class.correct]="showCorrectResult && activeQuestion().correct === 2">
-                    <mdc-radio [style.display]="answeringQuestions ? '' : 'none'" #radio2></mdc-radio>
-                    <div mdcHeadline4 class="card-title" mdcHeadline5>{{activeQuestion().answer2}}</div>
-                </mdc-card>
-                <mdc-card class="card--active" [class.correct]="showCorrectResult && activeQuestion().correct === 3">
-                    <mdc-radio [style.display]="answeringQuestions ? '' : 'none'" #radio3></mdc-radio>
-                    <div mdcHeadline4 class="card-title" mdcHeadline5>{{activeQuestion().answer3}}</div>
-                </mdc-card>
-                <mdc-card class="card--active" [class.correct]="showCorrectResult && activeQuestion().correct === 4">
-                    <mdc-radio [style.display]="answeringQuestions ? '' : 'none'" #radio4></mdc-radio>
-                    <div mdcHeadline4 class="card-title" mdcHeadline5>{{activeQuestion().answer4}}</div>
-                </mdc-card>
-            </mdc-radio-group>
+            <mdc-card class="card--active" 
+                [class.active]="activeAnswer === 1"
+                [class.correct]="showCorrectResult && activeQuestion().correct === 1">
+                <button mdc-button raised class="top-app-bar-button" *ngIf="answeringQuestions" (click)="answer(1)"></button>
+                <div mdcHeadline4 class="card-title" mdcHeadline5>{{activeQuestion().answer1}}</div>
+            </mdc-card>
+            <mdc-card class="card--active" 
+                [class.active]="activeAnswer === 2"
+                [class.correct]="showCorrectResult && activeQuestion().correct === 2">
+                <button mdc-button raised class="top-app-bar-button" *ngIf="answeringQuestions" (click)="answer(2)"></button>
+                <div mdcHeadline4 class="card-title" mdcHeadline5>{{activeQuestion().answer2}}</div>
+            </mdc-card>
+            <mdc-card class="card--active" 
+                [class.active]="activeAnswer === 3"
+                [class.correct]="showCorrectResult && activeQuestion().correct === 3">
+                <button mdc-button raised class="top-app-bar-button" *ngIf="answeringQuestions" (click)="answer(3)"></button>
+                <div mdcHeadline4 class="card-title" mdcHeadline5>{{activeQuestion().answer3}}</div>
+            </mdc-card>
+            <mdc-card class="card--active" 
+                [class.active]="activeAnswer === 4"
+                [class.correct]="showCorrectResult && activeQuestion().correct === 4">
+                <button mdc-button raised class="top-app-bar-button" *ngIf="answeringQuestions" (click)="answer(4)"></button>
+                <div mdcHeadline4 class="card-title" mdcHeadline5>{{activeQuestion().answer4}}</div>
+            </mdc-card>
         </div>
     
         <div class="knowledge-button-container" *ngIf="showKnowledge">
