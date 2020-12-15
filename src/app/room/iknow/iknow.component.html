@@ -1,6 +1,13 @@
+<header>
+    <mdc-card class="card--active">
+        <div mdcHeadline4 class="card-title" mdcHeadline4>
+            {{  categories[data.room.activeCategory].name }}
+        </div>
+    </mdc-card>
+</header>
 <main>
     <div class="container">
-
+        
         <div *ngIf="showPercentage">
             <h1 class="text on-background" mdcHeadline4>50%</h1>
             <mdc-linear-progress determinate [progress]="0.5" [buffer]="1"></mdc-linear-progress>
