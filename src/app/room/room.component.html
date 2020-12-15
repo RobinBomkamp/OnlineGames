@@ -1,19 +1,22 @@
 <ng-container *ngIf="data$ | async as data">
-    <mdc-top-app-bar fixed [scrollTarget]="realContent" [fixedAdjustElement]="fixedContent" dense>
+    <mdc-top-app-bar fixed [scrollTarget]="realContent" [fixedAdjustElement]="fixedContent" dense *ngIf="userService.getUser() === data.room.host">
         <mdc-top-app-bar-row>
             <mdc-top-app-bar-section align="start" title="{{data.room.name}} - {{userService.getUser()}}">
             </mdc-top-app-bar-section>
             <mdc-top-app-bar-section align="end">
-                <button mdc-button raised class="top-app-bar-button" (click)="game.startGame()" *ngIf="userService.getUser() === data.room.host">Neue Runde starten</button>
+                <button mdc-button raised class="top-app-bar-button" (click)="iknow.reset()">Reset</button>
+                <button mdc-button raised class="top-app-bar-button" (click)="iknow.back()">Zurück</button>
+                <button mdc-button raised class="top-app-bar-button" (click)="iknow.next()">Weiter</button>
                 <button mdc-button raised class="top-app-bar-button" (click)="copyInvitationLink()">Einladungslink kopieren</button>
             </mdc-top-app-bar-section>
         </mdc-top-app-bar-row>
     </mdc-top-app-bar>
     <div #fixedContent class="content">
         <div mdcDrawerAppContent class="drawer-content" #realContent>
-            <app-game [users]="data.users" [room]="data.room" [jobs]="data.jobs" #game></app-game>
+            <app-iknow [data]="data" #iknow></app-iknow>
+            <!-- <app-game [users]="data.users" [room]="data.room" [jobs]="data.jobs" #game style="display: none;"></app-game> -->
         </div>
-        <mdc-drawer class="drawer" dir="rtl">
+        <mdc-drawer class="drawer" dir="rtl" *ngIf="userService.getUser() === data.room.host">
             <mdc-drawer-header>
                 <h3 mdcDrawerTitle>Raum</h3>
                 <h6 mdcDrawerSubtitle>Nutzer</h6>

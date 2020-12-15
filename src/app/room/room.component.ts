@@ -9,7 +9,7 @@ import { UserService } from '../services/user.service';
 import { Clipboard } from "@angular/cdk/clipboard";
 import { NavigationService } from '../services/navigation.service';
 
-class ObservedData {
+export class ObservedData {
   room: RoomModel;
   users: UserModel[];
   jobs: JobsToUserModel[];

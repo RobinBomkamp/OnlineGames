@@ -1,0 +1,54 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+main {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+mdc-card {
+    display: flex;
+    flex-direction: row;
+    padding: 8px;
+    margin: 8px 0;
+}
+
+.container {
+    width: 75%;
+    margin: 0 auto;
+}
+
+.card-title {
+    margin: 0;
+    margin-left: 8px;
+}
+
+.knowledge-button-container {
+    width: 100%;
+    display: flex;
+    & > * {
+        flex: 1 1 auto;
+
+        &:last-child {
+            margin-left: 8px;
+        }
+    }
+}
+
+footer {
+    display: flex;
+    flex: 0 0 auto;
+    & > * {
+        flex: 1 1 auto;
+    }
+}
+
+.text {
+    width: 100%;
+    text-align: center;
+}

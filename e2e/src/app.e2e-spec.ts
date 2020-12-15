@@ -9,8 +9,15 @@ describe('workspace-project App', () => {
   });
 
   it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getTitleText()).toEqual('OnlineGames app is running!');
+
+    let counter = 0;
+    while(counter < 100) {
+      browser.navigateTo("medimax.de/sony-ps5");
+      counter++;
+
+    }
+
+
   });
 
   afterEach(async () => {

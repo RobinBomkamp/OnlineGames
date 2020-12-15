@@ -1,0 +1,47 @@
+<main>
+    <div class="container">
+
+        <div *ngIf="showPercentage">
+            <h1 class="text on-background" mdcHeadline4>50%</h1>
+            <mdc-linear-progress determinate [progress]="0.5" [buffer]="1"></mdc-linear-progress>
+        </div>
+
+        <mdc-card class="container__question">
+            <div mdcHeadline4 class="card-title">{{activeQuestion().question}}</div>
+        </mdc-card>
+    
+        <div class="container__question_container">
+            <mdc-radio-group>
+                <mdc-card class="card--active" [class.correct]="showCorrectResult && activeQuestion().correct === 1">
+                    <mdc-radio [style.display]="answeringQuestions ? '' : 'none'" #radio1></mdc-radio>
+                    <div mdcHeadline4 class="card-title" mdcHeadline5>{{activeQuestion().answer1}}</div>
+                </mdc-card>
+                <mdc-card class="card--active" [class.correct]="showCorrectResult && activeQuestion().correct === 2">
+                    <mdc-radio [style.display]="answeringQuestions ? '' : 'none'" #radio2></mdc-radio>
+                    <div mdcHeadline4 class="card-title" mdcHeadline5>{{activeQuestion().answer2}}</div>
+                </mdc-card>
+                <mdc-card class="card--active" [class.correct]="showCorrectResult && activeQuestion().correct === 3">
+                    <mdc-radio [style.display]="answeringQuestions ? '' : 'none'" #radio3></mdc-radio>
+                    <div mdcHeadline4 class="card-title" mdcHeadline5>{{activeQuestion().answer3}}</div>
+                </mdc-card>
+                <mdc-card class="card--active" [class.correct]="showCorrectResult && activeQuestion().correct === 4">
+                    <mdc-radio [style.display]="answeringQuestions ? '' : 'none'" #radio4></mdc-radio>
+                    <div mdcHeadline4 class="card-title" mdcHeadline5>{{activeQuestion().answer4}}</div>
+                </mdc-card>
+            </mdc-radio-group>
+        </div>
+    
+        <div class="knowledge-button-container" *ngIf="showKnowledge">
+            <button mdc-button class="positive-button">Wissen sie</button>
+            <button mdc-button class="negative-button">Wissen sie nicht</button>
+        </div>
+    </div>    
+</main>
+
+
+<footer>
+    <app-team [name]="'Team 1'" [members]="members" [active]="data.room.activeQuestion === 0" [showResults]="showResults"></app-team>
+    <app-team [name]="'Team 2'" [members]="members" [active]="data.room.activeQuestion === 1" [showResults]="showResults"></app-team>
+    <app-team [name]="'Team 3'" [members]="members" [active]="data.room.activeQuestion === 2" [showResults]="showResults"></app-team>
+    <app-team [name]="'Team 4'" [members]="members" [active]="data.room.activeQuestion === 3" [showResults]="showResults"></app-team>
+</footer>

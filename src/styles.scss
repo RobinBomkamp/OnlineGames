@@ -22,6 +22,8 @@
 @use './styles/drawer';
 @use './styles/snackbar';
 @use './styles/image-list';
-
+@use './styles/checkbox';
+@use './styles/radio';
+@use './styles/linear-progress';
 // Angular MDC
 @use '@angular-mdc/theme/material';

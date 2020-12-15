@@ -14,3 +14,11 @@
   @include button.filled-accessible(theme.$surface);
   margin-left: 8px;
 }
+
+.positive-button {
+  @include button.filled-accessible(#1eb980);
+}
+
+.negative-button {
+  @include button.filled-accessible(#B00020);
+}
