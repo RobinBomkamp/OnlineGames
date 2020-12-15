@@ -41,7 +41,7 @@
 
 <footer>
     <app-team
-        *ngFor="let team of data.teams; let i = index"
+        *ngFor="let team of getTeams(); let i = index"
         [name]="team.name" 
         [members]="team.members" 
         [active]="data.room.activeQuestion === i" 

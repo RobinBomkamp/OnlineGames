@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RoomModel, JobsToUserModel } from '../model/room.model';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { ActivatedRoute } from '@angular/router';
 import { UserModel } from '../model/user.model';
 import { MdcSnackbar } from '@angular-mdc/web';
 import { take, switchMap } from 'rxjs/operators';
@@ -33,9 +32,9 @@ export class RoomService {
     const id = this.firestore.createId();
     room.id = id;
     this.roomsCollection.doc(id).set(room);
-    this.addUserInternal(id, { name: room.host } as UserModel);
-    let jobs = this.roomsCollection.doc(id).collection<JobsToUserModel>("jobs");
     this.teamsService.createTeams(room);
+    this.addUserInternal(room, { name: room.host } as UserModel, false);
+    let jobs = this.roomsCollection.doc(id).collection<JobsToUserModel>("jobs");
     return id;
   }
 
@@ -52,7 +51,7 @@ export class RoomService {
           this.snackbar.open("Username already assigned to other user.")
           return;
         }
-        return this.addUserInternal(room.id, user);
+        return this.addUserInternal(room, user);
       })
     );
   }
@@ -61,9 +60,12 @@ export class RoomService {
     this.roomsCollection.doc(room.id).set(room);
   }
 
-  private addUserInternal(id: string, user: UserModel): Promise<any> {
+  private addUserInternal(room: RoomModel, user: UserModel, addUserToTeam: boolean = true): Promise<any> {
     user.id = this.firestore.createId();
-    let users = this.roomsCollection.doc(id).collection<UserModel>("users");
+    let users = this.roomsCollection.doc(room.id).collection<UserModel>("users");
+    if (addUserToTeam) {
+      this.teamsService.addUser(room, user);
+    }
     return users.doc(user.id).set(user);
   }
 

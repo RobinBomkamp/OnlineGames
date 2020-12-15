@@ -1,6 +1,7 @@
 import { MdcCheckbox, MdcRadio } from '@angular-mdc/web';
 import { AfterViewInit, Component, Input, OnChanges, OnInit, QueryList, SimpleChange, SimpleChanges, ViewChildren } from '@angular/core';
 import { CategoryModel, QuestionModel } from 'src/app/model/categories.model';
+import { TeamModel } from 'src/app/model/room.model';
 import { QuestionService } from 'src/app/services/question.service';
 import { RoomService } from 'src/app/services/room.service';
 import { ObservedData } from "../room.component";
@@ -78,5 +79,13 @@ export class IknowComponent implements OnInit {
     this.data.room.activeQuestion = 0;
     this.data.room.state = 0;
     this.roomService.setRoom(this.data.room);
+  }
+
+  getTeams(): TeamModel[] {
+    return this.data.teams.sort((a, b) => {
+      if (a.name < b.name) return -1;
+      else if (a.name > b.name) return 1;
+      else return 0;
+    })
   }
 }

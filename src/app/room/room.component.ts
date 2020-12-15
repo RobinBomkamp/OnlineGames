@@ -42,7 +42,7 @@ export class RoomComponent implements OnInit {
     public userService: UserService,
     private clipboard: Clipboard,
     private navigation: NavigationService,
-    private teamService: TeamService
+    public teamService: TeamService
   ) { }
 
   ngOnInit(): void {
