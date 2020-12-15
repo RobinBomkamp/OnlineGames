@@ -57,3 +57,8 @@
     background: theme.$primary;
     background: linear-gradient(90deg, #ffcf44 0%, theme.$primary 100%);
 }
+
+.active-and-correct {
+    background: #ffcf44;
+    background: linear-gradient(90deg, #ffcf44 0%, #1eb980 100%);
+}

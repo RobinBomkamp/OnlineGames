@@ -11,30 +11,30 @@
         </mdc-card>
     
         <div class="container__question_container">
-            <mdc-card class="card--active" 
-                [class.active]="activeAnswer === 1"
-                [class.correct]="showCorrectResult && activeQuestion().correct === 1">
-                <button mdc-button raised class="top-app-bar-button" *ngIf="answeringQuestions" (click)="answer(1)"></button>
-                <div mdcHeadline4 class="card-title" mdcHeadline5>{{activeQuestion().answer1}}</div>
+            <mdc-card  
+                *ngFor="let i of answers"
+                class="card--active" 
+                [class.active-and-correct]="isActiveAnswer(i) && isCorrectAnswer(i)"
+                [class.active]="isActiveAnswer(i)"
+                [class.correct]="isCorrectAnswer(i)">
+                <button mdc-button raised class="top-app-bar-button" *ngIf="answeringQuestions" (click)="answer(i)"></button>
+                <div mdcHeadline4 class="card-title" mdcHeadline5>
+                    {{
+                        i === 1 ? activeQuestion().answer1 : 
+                        i === 2 ? activeQuestion().answer2 : 
+                        i === 3 ? activeQuestion().answer3 : 
+                        activeQuestion().answer4
+                    }}
+                </div>
             </mdc-card>
-            <mdc-card class="card--active" 
-                [class.active]="activeAnswer === 2"
-                [class.correct]="showCorrectResult && activeQuestion().correct === 2">
-                <button mdc-button raised class="top-app-bar-button" *ngIf="answeringQuestions" (click)="answer(2)"></button>
-                <div mdcHeadline4 class="card-title" mdcHeadline5>{{activeQuestion().answer2}}</div>
-            </mdc-card>
-            <mdc-card class="card--active" 
-                [class.active]="activeAnswer === 3"
-                [class.correct]="showCorrectResult && activeQuestion().correct === 3">
-                <button mdc-button raised class="top-app-bar-button" *ngIf="answeringQuestions" (click)="answer(3)"></button>
-                <div mdcHeadline4 class="card-title" mdcHeadline5>{{activeQuestion().answer3}}</div>
-            </mdc-card>
-            <mdc-card class="card--active" 
-                [class.active]="activeAnswer === 4"
-                [class.correct]="showCorrectResult && activeQuestion().correct === 4">
-                <button mdc-button raised class="top-app-bar-button" *ngIf="answeringQuestions" (click)="answer(4)"></button>
-                <div mdcHeadline4 class="card-title" mdcHeadline5>{{activeQuestion().answer4}}</div>
-            </mdc-card>
+        </div>
+        <div *ngIf="userService.getUser() === data.room.host && data.room.state === 3" class="knowledge-button-container">
+            <button 
+                *ngFor="let i of answers" 
+                class="top-app-bar-button" 
+                mdc-button 
+                raised 
+                (click)="setAnswerFromTeam(i)">{{i}}</button>
         </div>
     
         <div class="knowledge-button-container" *ngIf="showKnowledge">

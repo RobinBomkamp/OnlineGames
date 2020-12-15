@@ -1,5 +1,4 @@
-import { MdcCheckbox, MdcRadio } from '@angular-mdc/web';
-import { AfterViewInit, Component, Input, OnChanges, OnInit, QueryList, SimpleChange, SimpleChanges, ViewChildren } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CategoryModel, QuestionModel } from 'src/app/model/categories.model';
 import { TeamModel } from 'src/app/model/room.model';
 import { AnswerService } from 'src/app/services/answer.service';
@@ -19,6 +18,7 @@ export class IknowComponent implements OnInit {
   @Input() data: ObservedData;
 
   activeAnswer = 0;
+  answers = [1, 2, 3, 4];
 
   categories: CategoryModel[];
   
@@ -28,14 +28,17 @@ export class IknowComponent implements OnInit {
   get showKnowledge() : boolean {
     return this.data.room.state === 2;
   }
-  get showResults() : boolean {
+  get getAnswerFromTeam() : boolean {
     return this.data.room.state >= 3;
   }
   get showCorrectResult() : boolean {
     return this.data.room.state >= 4;
   }
+  get showResults() : boolean {
+    return this.data.room.state >= 5;
+  }
   get showPercentage() : boolean {
-    return this.data.room.state === 5;
+    return this.data.room.state === 6;
   }
 
   constructor(
@@ -56,9 +59,11 @@ export class IknowComponent implements OnInit {
 
   next() {
     this.data.room.state++;
-    if (this.data.room.state >= 6) {
+    if (this.data.room.state >= 7) {
       this.data.room.activeCategory++;
       this.data.room.state = 0;
+      this.data.room.activeAnswer = 0;
+      this.activeAnswer = 0;
       if (this.data.room.activeCategory > this.categories.length - 1) {
         this.data.room.activeCategory = 0;
         this.data.room.activeQuestion++;
@@ -110,5 +115,22 @@ export class IknowComponent implements OnInit {
     }
     team.knowledge = value;
     this.teamService.setTeam(this.data.room, team);
+  }
+
+  setAnswerFromTeam(answer: number) {
+    if (this.data.room.activeAnswer === answer) {
+      return;
+    }
+    this.data.room.activeAnswer = answer;
+    this.roomService.setRoom(this.data.room);
+  }
+
+  isActiveAnswer(i: number): boolean {
+    return (!this.getAnswerFromTeam && this.activeAnswer === i) || 
+      (this.getAnswerFromTeam && this.data.room.activeAnswer === i);
+  }
+
+  isCorrectAnswer(i: number): boolean {
+    return this.showCorrectResult && this.activeQuestion().correct === i;
   }
 }
