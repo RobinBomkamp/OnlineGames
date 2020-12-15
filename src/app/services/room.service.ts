@@ -54,6 +54,10 @@ export class RoomService {
     );
   }
 
+  setRoom(room: RoomModel) {
+    this.roomsCollection.doc(room.id).set(room);
+  }
+
   private addUserInternal(id: string, user: UserModel): Promise<any> {
     user.id = this.firestore.createId();
     let users = this.roomsCollection.doc(id).collection<UserModel>("users");

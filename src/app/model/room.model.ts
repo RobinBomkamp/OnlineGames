@@ -13,5 +13,9 @@ export class RoomModel {
     agentName: string = "";
     activePlace: number = -1;
 
+    state: number = 1;
+    activeCategory: number = 0;
+    activeQuestion: number = 0;
+
     // jobs: JobsToUserModel[] = [];
 }

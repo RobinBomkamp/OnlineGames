@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { MdcFormFieldModule, MdcTextFieldModule, MdcButtonModule, MdcCardModule, MdcIconModule, MdcTopAppBarModule, MdcDrawerModule, MdcListModule, MdcTypographyModule, MdcSnackbarModule, MdcImageListModule, MdcCheckboxModule } from "@angular-mdc/web";
+import { MdcFormFieldModule, MdcTextFieldModule, MdcButtonModule, MdcCardModule, MdcIconModule, MdcTopAppBarModule, MdcDrawerModule, MdcListModule, MdcTypographyModule, MdcSnackbarModule, MdcImageListModule, MdcCheckboxModule, MdcRadioModule, MdcLinearProgressModule } from "@angular-mdc/web";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +14,8 @@ import { environment } from '../environments/environment';
 import { RoomComponent } from './room/room.component';
 import { JoinComponent } from './join/join.component';
 import { GameComponent } from './room/game/game.component';
+import { IknowComponent } from './room/iknow/iknow.component';
+import { TeamComponent } from './room/iknow/team/team.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { GameComponent } from './room/game/game.component';
     HomeComponent,
     RoomComponent,
     JoinComponent,
-    GameComponent
+    GameComponent,
+    IknowComponent,
+    TeamComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +47,9 @@ import { GameComponent } from './room/game/game.component';
     MdcTypographyModule,
     MdcSnackbarModule,
     MdcImageListModule,
-    MdcCheckboxModule
+    MdcCheckboxModule,
+    MdcRadioModule,
+    MdcLinearProgressModule
   ],
   providers: [],
   bootstrap: [AppComponent]
