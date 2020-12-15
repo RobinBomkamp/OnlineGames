@@ -19,6 +19,10 @@ export class IknowComponent implements OnInit {
   get data(): ObservedData { return this._data; }
   set data(v: ObservedData) {
     this._data = v;
+    if (v.room.state === 0) {
+      this.activeAnswer = 0;
+      this.allAnswers = null;
+    }
     if (v.room.state === 6 && !this.allAnswers) {
       this.getAllResults();
     }
@@ -28,7 +32,7 @@ export class IknowComponent implements OnInit {
   activeAnswer = 0;
   answers = [1, 2, 3, 4];
 
-  allAnswers: any = null;
+  allAnswers: number[] = null;
 
   categories: CategoryModel[];
   
@@ -145,6 +149,49 @@ export class IknowComponent implements OnInit {
   }
 
   getAllResults() {
-    this.allAnswers = [];
+    this.answerService.getAllAnswers(this.data.room).subscribe(answers => {
+      this.allAnswers = answers;
+      if (this.userService.getUser() === this.data.room.host) {
+        this.givePoints(answers);
+      }
+    });
+  }
+
+  getProgress(answers: number[]): number {
+    if (!answers) {
+      return 0;
+    }
+    let correct = this.activeQuestion().correct;
+    let totalCount = answers.length;
+    let correctCount = answers.filter(x => x === correct).length;
+    return correctCount / totalCount;
+  }
+
+  private givePoints(answers: number[]) {
+    let points = this.getPoints(answers);
+    let answeredCorrectly = this.data.room.activeAnswer === this.activeQuestion().correct;
+    let correctTeams = this.data.teams.filter(x => x.knowledge === answeredCorrectly);
+    for (const correctTeam of correctTeams) {
+      this.setPointsForTeam(correctTeam, points);
+    }
+  }
+
+  getPoints(answers: number[]) {
+    let progress = this.getProgress(answers);
+    if (progress < 0.25) {
+      return  5;
+    } else if (progress < 0.45) {
+      return 4;
+    } else if (progress < 0.65) {
+      return 3;
+    } else if (progress < 0.85) {
+      return 2;
+    } 
+    return 1;
+  }
+
+  private setPointsForTeam(team: TeamModel, points: number) {
+    team.points += points;
+    this.teamService.setTeam(this.data.room, team)
   }
 }

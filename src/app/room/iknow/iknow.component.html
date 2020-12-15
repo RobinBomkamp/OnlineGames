@@ -9,8 +9,8 @@
     <div class="container">
         
         <div *ngIf="showPercentage">
-            <h1 class="text on-background" mdcHeadline4>50%</h1>
-            <mdc-linear-progress determinate [progress]="0.5" [buffer]="1"></mdc-linear-progress>
+            <h1 class="text on-background" mdcHeadline4>{{getProgress(allAnswers) * 100}}% (Punkte: {{getPoints(allAnswers)}})</h1>
+            <mdc-linear-progress determinate [progress]="getProgress(allAnswers)" [buffer]="1"></mdc-linear-progress>
         </div>
 
         <mdc-card class="container__question">
