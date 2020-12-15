@@ -23,8 +23,12 @@ export class TeamService {
 
   createTeams(room: RoomModel) {
     for (let index = 1; index < 5; index++) {
-      let team = new TeamModel();
+      let team = {} as TeamModel;
       team.name = "Team " + index;
+      team.members = [];
+      team.points = 0;
+      team.knowledge = false;
+
       this.createTeam(room, team);
     }
   }
