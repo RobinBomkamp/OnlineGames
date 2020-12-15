@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { first, map, take } from 'rxjs/operators';
 import { AnswerModel, RoomModel } from '../model/room.model';
 import { UserModel } from '../model/user.model';
 
@@ -25,5 +27,19 @@ export class AnswerService {
       .collection<AnswerModel>(this.answersSelector)
       .doc(user.id)
       .set({ value: answer } as AnswerModel)
+  }
+
+
+  getAllAnswers(room: RoomModel): Observable<number[]> {
+    return this.roomsCollection.doc<RoomModel>(room.id)
+      .collection(this.answersSelector)
+      .snapshotChanges()
+      .pipe(
+        map((snaps) =>
+          snaps.map((snap) => (snap.payload.doc.data() as any).value as number),
+        ),
+        take(1),
+        first(),
+      );
   }
 }

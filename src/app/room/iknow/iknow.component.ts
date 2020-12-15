@@ -15,10 +15,20 @@ import { ObservedData } from "../room.component";
 })
 export class IknowComponent implements OnInit {
 
-  @Input() data: ObservedData;
+  @Input() 
+  get data(): ObservedData { return this._data; }
+  set data(v: ObservedData) {
+    this._data = v;
+    if (v.room.state === 6 && !this.allAnswers) {
+      this.getAllResults();
+    }
+  }
+  private _data: ObservedData;
 
   activeAnswer = 0;
   answers = [1, 2, 3, 4];
+
+  allAnswers: any = null;
 
   categories: CategoryModel[];
   
@@ -132,5 +142,9 @@ export class IknowComponent implements OnInit {
 
   isCorrectAnswer(i: number): boolean {
     return this.showCorrectResult && this.activeQuestion().correct === i;
+  }
+
+  getAllResults() {
+    this.allAnswers = [];
   }
 }

@@ -58,7 +58,6 @@ export class TeamService {
         ),
         take(1),
         first(),
-        tap(console.log),
       );
   }
 
