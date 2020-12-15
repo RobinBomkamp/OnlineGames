@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserModel } from '../model/user.model';
 import { MdcSnackbar } from '@angular-mdc/web';
 import { take, switchMap } from 'rxjs/operators';
+import { TeamService } from './team.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class RoomService {
 
   constructor(
     private firestore: AngularFirestore,
-    private snackbar: MdcSnackbar
+    private snackbar: MdcSnackbar,
+    private teamsService: TeamService
   ) {
     this.roomsCollection = this.firestore.collection<RoomModel>(this.roomSelector);
   }
@@ -33,6 +35,7 @@ export class RoomService {
     this.roomsCollection.doc(id).set(room);
     this.addUserInternal(id, { name: room.host } as UserModel);
     let jobs = this.roomsCollection.doc(id).collection<JobsToUserModel>("jobs");
+    this.teamsService.createTeams(room);
     return id;
   }
 

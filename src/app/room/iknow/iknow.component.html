@@ -40,8 +40,11 @@
 
 
 <footer>
-    <app-team [name]="'Team 1'" [members]="members" [active]="data.room.activeQuestion === 0" [showResults]="showResults"></app-team>
-    <app-team [name]="'Team 2'" [members]="members" [active]="data.room.activeQuestion === 1" [showResults]="showResults"></app-team>
-    <app-team [name]="'Team 3'" [members]="members" [active]="data.room.activeQuestion === 2" [showResults]="showResults"></app-team>
-    <app-team [name]="'Team 4'" [members]="members" [active]="data.room.activeQuestion === 3" [showResults]="showResults"></app-team>
+    <app-team
+        *ngFor="let team of data.teams; let i = index"
+        [name]="team.name" 
+        [members]="team.members" 
+        [active]="data.room.activeQuestion === i" 
+        [showResults]="showResults">
+    </app-team>
 </footer>

@@ -1,6 +1,14 @@
+import { UserModel } from './user.model';
+
 export class JobsToUserModel {
     job: string;
     user: string;
+}
+
+export class TeamModel {
+    id: string = null;
+    name: string = "";
+    members: UserModel[] = [];
 }
 
 export class RoomModel {

@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, combineLatest } from 'rxjs';
-import { RoomModel, JobsToUserModel } from '../model/room.model';
+import { RoomModel, JobsToUserModel, TeamModel } from '../model/room.model';
 import { RoomService } from '../services/room.service';
 import { switchMap, map } from "rxjs/operators";
 import { UserModel } from '../model/user.model';
 import { UserService } from '../services/user.service';
 import { Clipboard } from "@angular/cdk/clipboard";
 import { NavigationService } from '../services/navigation.service';
+import { TeamService } from '../services/team.service';
 
 export class ObservedData {
   room: RoomModel;
   users: UserModel[];
   jobs: JobsToUserModel[];
+  teams: TeamModel[];
 }
 
 @Component({
@@ -39,7 +41,8 @@ export class RoomComponent implements OnInit {
     private roomService: RoomService,
     public userService: UserService,
     private clipboard: Clipboard,
-    private navigation: NavigationService
+    private navigation: NavigationService,
+    private teamService: TeamService
   ) { }
 
   ngOnInit(): void {
@@ -50,19 +53,25 @@ export class RoomComponent implements OnInit {
         return this.roomService.getUsersFromRoom(room);
       })
     );
+    let teams$ = this.room$.pipe(
+      switchMap(room => {
+        return this.teamService.getTeamsFromRoom(room);
+      })
+    );
     let jobs$ = this.room$.pipe(
       switchMap(room => {
         return this.roomService.getJobsToUsersFromRoom(room);
       })
     )
 
-    this.data$ = combineLatest(this.room$, this.users$, jobs$).pipe(
-      map(([room, users, jobs]) => {
+    this.data$ = combineLatest(this.room$, this.users$, jobs$, teams$).pipe(
+      map(([room, users, jobs, teams]) => {
         this.roomService.saveRoom(room.id);
         return {
           room: room,
           users: users,
-          jobs: jobs
+          jobs: jobs,
+          teams: teams
         } as ObservedData
       })
     );
