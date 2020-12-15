@@ -51,7 +51,7 @@ export class RoomService {
           this.snackbar.open("Username already assigned to other user.")
           return;
         }
-        return this.addUserInternal(room, user);
+        return this.addUserInternal(room, user, user.name !== "Jasmin");
       })
     );
   }

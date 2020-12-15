@@ -23,7 +23,10 @@ export class IknowComponent implements OnInit {
       this.activeAnswer = 0;
       this.allAnswers = null;
     }
-    if (v.room.state === 6 && !this.allAnswers) {
+    if (this.showKnowledge && this.getTeams().indexOf(this.getTeamOfUser()) === this.data.room.activeQuestion) {
+      this.knowledge(true);
+    }
+    if (this.showPercentage && !this.allAnswers) {
       this.getAllResults();
     }
   }
@@ -121,9 +124,13 @@ export class IknowComponent implements OnInit {
     this.activeAnswer = answer;
   }
 
-  knowledge(value: boolean) {
+  getTeamOfUser(): TeamModel {
     let user = this.data.users.find(x => x.name === this.userService.getUser());
-    let team = this.data.teams.find(x => x.members.findIndex(y => y.name === user.name) > -1);
+    return this.data.teams.find(x => x.members.findIndex(y => y.name === user.name) > -1);
+  }
+
+  knowledge(value: boolean) {
+    let team = this.getTeamOfUser();
     if (team.knowledge === value) {
       return;
     }

@@ -9,6 +9,7 @@
     }
   },
   "projects": {
-    "default": "online-games-rbom-1954-new"
+    "default": "onlinegames-op",
+    "onlinegames-op": "onlinegames-op"
   }
 }
