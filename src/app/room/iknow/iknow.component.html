@@ -19,12 +19,10 @@
                 [class.correct]="isCorrectAnswer(i)">
                 <button mdc-button raised class="top-app-bar-button" *ngIf="answeringQuestions" (click)="answer(i)"></button>
                 <div mdcHeadline4 class="card-title" mdcHeadline5>
-                    {{
-                        i === 1 ? activeQuestion().answer1 : 
+                    {{  i === 1 ? activeQuestion().answer1 : 
                         i === 2 ? activeQuestion().answer2 : 
                         i === 3 ? activeQuestion().answer3 : 
-                        activeQuestion().answer4
-                    }}
+                        activeQuestion().answer4 }}
                 </div>
             </mdc-card>
         </div>
