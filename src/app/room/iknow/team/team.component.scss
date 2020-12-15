@@ -28,7 +28,11 @@ mdc-card {
     }
 
     & > div:last-child {
-        flex: 0 0 35%;
+        flex: 0 0 45%;
         margin-right: 4px;
     }
+}
+
+.right {
+    padding-bottom: 8px;
 }

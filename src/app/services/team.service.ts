@@ -23,10 +23,8 @@ export class TeamService {
 
   createTeams(room: RoomModel) {
     for (let index = 1; index < 5; index++) {
-      let team = {
-        name: "Team " + index,
-        members: []
-      } as TeamModel;
+      let team = new TeamModel();
+      team.name = "Team " + index;
       this.createTeam(room, team);
     }
   }
@@ -77,5 +75,9 @@ export class TeamService {
       teamsNew.doc(team.id).set(team);
     });
   }
+
+  setTeam(room: RoomModel, team: TeamModel) {
+    this.roomsCollection.doc(room.id).collection<TeamModel>(this.teamsSelector).doc(team.id).set(team);
+  } 
 
 }
