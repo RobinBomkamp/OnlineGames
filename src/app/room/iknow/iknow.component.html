@@ -1,60 +1,94 @@
-<header>
-    <mdc-card class="card--active">
-        <div mdcHeadline4 class="card-title" mdcHeadline4>
-            {{  categories[data.room.activeCategory].name }}
-        </div>
-    </mdc-card>
-</header>
-<main>
-    <div class="container">
-        
-        <div class="percentage-container" *ngIf="showPercentage">
-            <h1 class="text on-background" mdcHeadline4>{{getProgress(allAnswers) * 100}}% (Punkte: {{getPoints(allAnswers)}})</h1>
-            <mdc-linear-progress determinate [progress]="getProgress(allAnswers)" [buffer]="1"></mdc-linear-progress>
-        </div>
+<ng-container *ngIf="!showStartingScreen; else startingScreen">
+    <ng-container *ngIf="!showTitle; else title">
+        <header>
+            <mdc-card class="card--active">
+                <div mdcHeadline4 class="card-title" mdcHeadline4>
+                    {{  categories[data.room.activeCategory].name }}
+                </div>
+            </mdc-card>
+        </header>
 
-        <mdc-card class="container__question">
-            <div mdcHeadline4 class="card-title">{{activeQuestion().question}}</div>
+        <mdc-card class="card--active right">
+            <div mdcHeadline4 class="card-title" mdcHeadline4>
+                {{userService.getUser()}}
+            </div>
         </mdc-card>
-    
-        <div class="container__question_container">
-            <mdc-card  
-                *ngFor="let i of answers"
-                class="card--active" 
-                [class.active-and-correct]="isActiveAnswer(i) && isCorrectAnswer(i)"
-                [class.active]="isActiveAnswer(i)"
-                [class.correct]="isCorrectAnswer(i)">
-                <button mdc-button raised class="top-app-bar-button" *ngIf="answeringQuestions" (click)="answer(i)"></button>
-                <div mdcHeadline4 class="card-title" mdcHeadline5>
-                    {{  i === 1 ? activeQuestion().answer1 : 
-                        i === 2 ? activeQuestion().answer2 : 
-                        i === 3 ? activeQuestion().answer3 : 
-                        activeQuestion().answer4 }}
+        <main>
+            <div class="container">
+                
+                <div class="percentage-container" *ngIf="showPercentage">
+                    <h1 class="text on-background" mdcHeadline4>{{getProgress(allAnswers) * 100}}% (Punkte: {{getPoints(allAnswers)}})</h1>
+                    <mdc-linear-progress determinate [progress]="getProgress(allAnswers)" [buffer]="1"></mdc-linear-progress>
+                </div>
+        
+                <mdc-card class="container__question">
+                    <div mdcHeadline4 class="card-title">{{activeQuestion().question}}</div>
+                </mdc-card>
+            
+                <div class="container__question_container">
+                    <mdc-card  
+                        *ngFor="let i of answers"
+                        class="card--active" 
+                        [class.active-and-correct]="isActiveAnswer(i) && isCorrectAnswer(i)"
+                        [class.active]="isActiveAnswer(i)"
+                        [class.correct]="isCorrectAnswer(i)">
+                        <button mdc-button raised class="top-app-bar-button answer-button" *ngIf="answeringQuestions" (click)="answer(i)"></button>
+                        <div mdcHeadline4 class="card-title" mdcHeadline5>
+                            {{  i === 1 ? activeQuestion().answer1 : 
+                                i === 2 ? activeQuestion().answer2 : 
+                                i === 3 ? activeQuestion().answer3 : 
+                                activeQuestion().answer4 }}
+                        </div>
+                    </mdc-card>
+                </div>
+                <div *ngIf="userService.getUser() === data.room.host && data.room.state === 3" class="knowledge-button-container">
+                    <button 
+                        *ngFor="let i of answers" 
+                        class="top-app-bar-button" 
+                        mdc-button 
+                        raised 
+                        (click)="setAnswerFromTeam(i)">{{i}}</button>
+                </div>
+            
+                <div class="knowledge-button-container" *ngIf="showKnowledge && getTeams().indexOf(getTeamOfUser()) !== data.room.activeQuestion">
+                    <button mdc-button class="positive-button" (click)="knowledge(true)">Wissen sie</button>
+                    <button mdc-button class="negative-button" (click)="knowledge(false)">Wissen sie nicht</button>
+                </div>
+            </div>    
+        </main>
+        
+        
+        <footer>
+            <app-team
+                *ngFor="let team of getTeams(); let i = index"
+                [active]="data.room.activeQuestion === i" 
+                [showResults]="showResults"
+                [team]="team">
+            </app-team>
+        </footer>
+    </ng-container>
+</ng-container>
+
+<ng-template #startingScreen>
+    <header class="starting-container">
+        <div class="inner-container">
+            <mdc-card class="card--active">
+                <div class="card-title" mdcHeadline2>
+                    Das Spiel startet in Kürze...
                 </div>
             </mdc-card>
         </div>
-        <div *ngIf="userService.getUser() === data.room.host && data.room.state === 3" class="knowledge-button-container">
-            <button 
-                *ngFor="let i of answers" 
-                class="top-app-bar-button" 
-                mdc-button 
-                raised 
-                (click)="setAnswerFromTeam(i)">{{i}}</button>
-        </div>
-    
-        <div class="knowledge-button-container" *ngIf="showKnowledge && getTeams().indexOf(getTeamOfUser()) !== data.room.activeQuestion">
-            <button mdc-button class="positive-button" (click)="knowledge(true)">Wissen sie</button>
-            <button mdc-button class="negative-button" (click)="knowledge(false)">Wissen sie nicht</button>
-        </div>
-    </div>    
-</main>
+    </header>
+</ng-template>
 
-
-<footer>
-    <app-team
-        *ngFor="let team of getTeams(); let i = index"
-        [active]="data.room.activeQuestion === i" 
-        [showResults]="showResults"
-        [team]="team">
-    </app-team>
-</footer>
+<ng-template #title>
+    <header class="starting-container">
+        <div class="inner-container">
+            <mdc-card class="card--active">
+                <div class="card-title" mdcHeadline2>
+                    Ich weiß, was Du nicht weißt...
+                </div>
+            </mdc-card>
+        </div>
+    </header>
+</ng-template>

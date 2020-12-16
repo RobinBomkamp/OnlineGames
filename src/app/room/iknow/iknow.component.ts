@@ -38,6 +38,13 @@ export class IknowComponent implements OnInit {
   allAnswers: number[] = null;
 
   categories: CategoryModel[];
+
+  get showStartingScreen(): boolean {
+    return this.data.room.state === -2;
+  }
+  get showTitle(): boolean {
+    return this.data.room.state === -1;
+  }
   
   get answeringQuestions() : boolean {
     return this.data.room.state === 1;
