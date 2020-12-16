@@ -1,0 +1,27 @@
+:host {
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+}
+
+.list-item {
+    & mdc-card {
+        height: 100%;
+
+        & div {
+            margin: auto 0;
+
+            & div {
+                text-align: center;
+            }
+        }
+    }
+}
+
+.job-container {
+    position: absolute;
+    bottom: 4px;
+    text-align: center;
+    width: 100%;
+}

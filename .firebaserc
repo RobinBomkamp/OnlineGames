@@ -1,0 +1,15 @@
+{
+  "targets": {
+    "onlinegames-op": {
+      "hosting": {
+        "OnlineGames": [
+          "onlinegames-op"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "onlinegames-op",
+    "onlinegames-op": "onlinegames-op"
+  }
+}

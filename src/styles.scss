@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+
+@use '@material/theme' with (
+  $primary: #125fd3,
+  $secondary: #3357f9,
+  $background: #111e58,
+  $surface: #0e1c22,
+  $error: #CF6679,
+);
+
+// MDC Typography
+@use '@material/typography/mdc-typography';
+@use '@material/typography/_index';
+
+// MDC Button
+@use './styles/body';
+@use './styles/button';
+@use './styles/text-field';
+@use './styles/card';
+@use './styles/top-app-bar';
+@use './styles/list';
+@use './styles/drawer';
+@use './styles/snackbar';
+@use './styles/image-list';
+@use './styles/checkbox';
+@use './styles/radio';
+@use './styles/linear-progress';
+// Angular MDC
+@use '@angular-mdc/theme/material';

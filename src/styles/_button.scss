@@ -1,0 +1,24 @@
+@use '@material/button/mdc-button';
+@use '@material/button';
+@use '@material/theme';
+
+.button-primary {
+  @include button.filled-accessible(theme.$primary);
+}
+
+.button-secondary {
+  @include button.filled-accessible(theme.$secondary);
+}
+
+.top-app-bar-button {
+  @include button.filled-accessible(theme.$surface);
+  margin-left: 8px;
+}
+
+.positive-button {
+  @include button.filled-accessible(#1abe51);
+}
+
+.negative-button {
+  @include button.filled-accessible(#B00020);
+}

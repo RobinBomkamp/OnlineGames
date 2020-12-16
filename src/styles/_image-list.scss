@@ -1,0 +1,7 @@
+@use '@material/image-list/mdc-image-list';
+@use '@material/image-list';
+
+.image-list {
+    flex: 1 1 auto;
+    @include image-list.standard-columns(5, 16px);
+}
