@@ -1,16 +1,16 @@
 <mdc-card [class.card--active]="active">
     <div>
-        <h2 class="title text" mdcHeadline6>{{name}}</h2>
+        <h2 class="title text" mdcHeadline6>{{team.name}}</h2>
         <div class="members">
-            <h3 class="member text" mdcSubtitle2 *ngFor="let member of members">{{member}}</h3>
+            <h3 class="member text" mdcSubtitle2 *ngFor="let member of team.members">{{member.name}}</h3>
         </div>
     </div>
-    <div>
-        <h1 class="text" mdcHeadline4>10</h1>
-        <mdc-card class="positive-card" *ngIf="showResults">
+    <div class="right">
+        <h1 class="text" mdcHeadline4>{{team.points}}</h1>
+        <mdc-card class="positive-card" *ngIf="showKnowledge && team.knowledge">
             <h1 class="text" mdcSubtitle2>Wissen Sie</h1>
         </mdc-card>
-        <mdc-card class="negative-card" *ngIf="showResults">
+        <mdc-card class="negative-card" *ngIf="showKnowledge && !team.knowledge">
             <h1 class="text" mdcSubtitle2>Wissen Sie nicht</h1>
         </mdc-card>
     </div>

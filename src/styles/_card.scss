@@ -3,12 +3,12 @@
 @use '@material/theme';
 
 .card-title {
-    @include theme.prop(color, theme.$primary);
+    @include theme.prop(color, theme.$on-primary);
     margin-bottom: 16px;
 }
 
 .text {
-    @include theme.prop(color, theme.$primary);
+    @include theme.prop(color, theme.$on-primary);
 }
 
 .card--active {
@@ -24,7 +24,7 @@
 }
 
 .positive-card {
-    @include card.fill-color(#1eb980);
+    @include card.fill-color(#1abe51);
     display: flex;
     flex-direction: column;
     
@@ -50,5 +50,15 @@
 
 .correct {
     background: theme.$primary;
-    background: linear-gradient(90deg, theme.$primary 0%, #1eb980 100%);
+    background: linear-gradient(90deg, theme.$primary 0%, #1abe51 100%);
+}
+
+.active {
+    background: theme.$primary;
+    background: linear-gradient(90deg, #ffbf00 0%, theme.$primary 100%);
+}
+
+.active-and-correct {
+    background: #ffcf44;
+    background: linear-gradient(90deg, #ffbf00 0%, #1abe51 100%);
 }

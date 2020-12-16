@@ -1,4 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TeamModel } from 'src/app/model/room.model';
+import { UserModel } from 'src/app/model/user.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-team',
@@ -6,14 +9,23 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./team.component.scss']
 })
 export class TeamComponent implements OnInit {
-  @Input() name: string;
   @Input() active: boolean;
-  @Input() members: string[];
   @Input() showResults: boolean;
+  @Input() team: TeamModel = new TeamModel();
 
-  constructor() { }
+  get showKnowledge(): boolean {
+    return this.showResults || this.currentUserIsInMembers();
+  }
+
+  constructor(
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  private currentUserIsInMembers(): boolean {
+    return this.team.members.findIndex(x => x.name === this.userService.getUser()) > -1;
   }
 
 }

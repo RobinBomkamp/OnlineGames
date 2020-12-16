@@ -4,6 +4,18 @@
     height: 100%;
 }
 
+header {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 32px;
+
+    .card-title {
+        margin: 0 8px;
+    }
+}
+
 main {
     flex: 1 1 auto;
     display: flex;
@@ -51,4 +63,35 @@ footer {
 .text {
     width: 100%;
     text-align: center;
+}
+
+.percentage-container {
+    margin-bottom: 32px;
+}
+
+.starting-container {
+    height: 100%;
+    margin-top: 0;
+
+    .inner-container {
+        margin: auto;
+    }
+
+    .card-title {
+        padding: 32px;
+    }
+}
+
+.right {
+    position: absolute;
+    right: 8px;
+    top: 32px;
+
+    .card-title {
+        margin-right: 8px;
+    }
+}
+
+.answer-button {
+    height: 32px !important;
 }
