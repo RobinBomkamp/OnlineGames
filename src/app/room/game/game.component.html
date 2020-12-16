@@ -1,0 +1,19 @@
+<ng-container *ngIf="room !== undefined && room !== null">
+    <mdc-image-list class="image-list" #list>
+        <mdc-image-list-item class="list-item" *ngFor="let place of places; let i = index">
+            <mdc-card [class.card--active]="i === room.activePlace && !isAgent()">
+                <div>
+                    <div mdcHeadline4 class="card-title">{{place.name}}</div>
+                </div>
+                <div class="job-container">
+                    {{getJob()}}
+                </div>
+            </mdc-card>
+        </mdc-image-list-item>
+    </mdc-image-list>
+    <mdc-top-app-bar [fixedAdjustElement]="list" class="bottom-app-bar" *ngIf="isAgent()">
+        <mdc-top-app-bar-row>
+            <mdc-top-app-bar-section align="start" title="Du bist der Agent."></mdc-top-app-bar-section>
+        </mdc-top-app-bar-row>
+    </mdc-top-app-bar>
+</ng-container>
